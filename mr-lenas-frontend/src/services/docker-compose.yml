@@ -1,0 +1,72 @@
+version: '3.9'
+
+services:
+
+  db:
+    image: mysql:8.0
+    container_name: mr_lenas_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mr_lenas
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mr_lenas_net
+
+  backend:
+    build:
+      context: ./mr-lenas-backend
+      dockerfile: Dockerfile
+    container_name: mr_lenas_backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_KEY: base64:dH2Ad04m5t1ggXeSEJSqVGETRynVnuCBVlsB/zTKGNw=
+      DB_CONNECTION: mysql
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_DATABASE: mr_lenas
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      SANCTUM_STATEFUL_DOMAINS: localhost:3000
+      FRONTEND_URL: http://localhost:3000
+    depends_on:
+      - db
+    networks:
+      - mr_lenas_net
+
+  frontend:
+    build:
+      context: ./mr-lenas-frontend
+      dockerfile: Dockerfile
+    container_name: mr_lenas_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - mr_lenas_net
+
+  ml:
+    build:
+      context: ./mr-lenas-ml
+      dockerfile: Dockerfile
+    container_name: mr_lenas_ml
+    restart: always
+    ports:
+      - "5000:5000"
+    networks:
+      - mr_lenas_net
+
+networks:
+  mr_lenas_net:
+    driver: bridge
+
+volumes:
+  db_data:
