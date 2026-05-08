@@ -11,29 +11,21 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Usuarios de prueba
-        User::create([
-            'name'     => 'Administrador',
-            'email'    => 'admin@mrlenas.com',
-            'password' => Hash::make('password'),
-            'role'     => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@mrlenas.com'],
+            ['name' => 'Administrador', 'password' => Hash::make('password'), 'role' => 'admin']
+        );
 
-        User::create([
-            'name'     => 'Cajero Principal',
-            'email'    => 'cajero@mrlenas.com',
-            'password' => Hash::make('password'),
-            'role'     => 'cajero',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'cajero@mrlenas.com'],
+            ['name' => 'Cajero Principal', 'password' => Hash::make('password'), 'role' => 'cajero']
+        );
 
-        User::create([
-            'name'     => 'Cocinero Principal',
-            'email'    => 'cocina@mrlenas.com',
-            'password' => Hash::make('password'),
-            'role'     => 'cocinero',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'cocina@mrlenas.com'],
+            ['name' => 'Cocinero Principal', 'password' => Hash::make('password'), 'role' => 'cocinero']
+        );
 
-        // Productos de prueba
         $productos = [
             ['name' => 'Pollo a la brasa (entero)',  'price' => 45.00, 'category' => 'Pollos'],
             ['name' => 'Pollo a la brasa (1/2)',      'price' => 25.00, 'category' => 'Pollos'],
@@ -48,7 +40,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($productos as $p) {
-            Product::create($p);
+            Product::firstOrCreate(['name' => $p['name']], $p);
         }
     }
 }
