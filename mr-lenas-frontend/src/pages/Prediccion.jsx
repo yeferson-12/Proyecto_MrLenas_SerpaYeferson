@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const ml = axios.create({ baseURL: 'http://127.0.0.1:5000' });
+const ml = axios.create({ baseURL: 'https://fantastic-cooperation-production.up.railway.app' });
 
 export default function Prediccion() {
   const hoy = new Date().toISOString().split('T')[0];
@@ -17,7 +17,7 @@ export default function Prediccion() {
       const res = await ml.get(`/prediccion?fecha=${fecha}`);
       setData(res.data);
     } catch {
-      setError('No se pudo conectar con el módulo ML. Verifica que esté corriendo en puerto 5000.');
+      setError('No se pudo conectar con el módulo ML.');
     } finally {
       setLoading(false);
     }
@@ -49,7 +49,6 @@ export default function Prediccion() {
 
       {data && (
         <>
-          {/* Resumen */}
           <div style={s.resumen}>
             <div style={s.resCard}>
               <span style={s.resLabel}>Fecha</span>
@@ -71,7 +70,6 @@ export default function Prediccion() {
             </div>
           </div>
 
-          {/* Tabla de predicciones */}
           <div style={s.tableWrap}>
             <table style={s.table}>
               <thead>
