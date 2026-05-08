@@ -14,14 +14,8 @@ COPY . .
 
 RUN composer install --no-dev --optimize-autoloader
 
-COPY .htaccess /var/www/html/.htaccess
-
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 
-EXPOSE 80
-
-CMD php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && apache2-foreground
+CMD php artisan config:clear && php artisan migrate --force && php artisan db:seed --force && sed -i "s/80/${PORT:-80}/g" /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf && apache2-foreground
