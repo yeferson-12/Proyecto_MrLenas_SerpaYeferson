@@ -116,5 +116,7 @@ def historial():
     return jsonify(df.tail(30).to_dict(orient='records'))
 
 if __name__ == '__main__':
-    print("🍗 Mr. Leñas — Módulo ML corriendo en http://localhost:5000")
-    app.run(host='0.0.0.0', debug=True, port=5000)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    print(f"🍗 Mr. Leñas — Módulo ML corriendo en http://localhost:{port}")
+    app.run(host='0.0.0.0', debug=False, port=port)
