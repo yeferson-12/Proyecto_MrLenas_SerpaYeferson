@@ -11,19 +11,19 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'admin@mrlenas.com'],
-            ['name' => 'Administrador', 'password' => Hash::make('password'), 'role' => 'admin']
+            ['name' => 'Administrador', 'password' => Hash::make('Admin@MrLenas2026!'), 'role' => 'admin']
         );
 
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'cajero@mrlenas.com'],
-            ['name' => 'Cajero Principal', 'password' => Hash::make('password'), 'role' => 'cajero']
+            ['name' => 'Cajero Principal', 'password' => Hash::make('Cajero@MrLenas2026!'), 'role' => 'cajero']
         );
 
-        User::firstOrCreate(
+        User::updateOrCreate(
             ['email' => 'cocina@mrlenas.com'],
-            ['name' => 'Cocinero Principal', 'password' => Hash::make('password'), 'role' => 'cocinero']
+            ['name' => 'Cocinero Principal', 'password' => Hash::make('Cocina@MrLenas2026!'), 'role' => 'cocinero']
         );
 
         $productos = [
