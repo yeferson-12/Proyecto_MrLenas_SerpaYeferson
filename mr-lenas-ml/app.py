@@ -13,7 +13,7 @@ CORS(app)
 # ── Conexión a MySQL ──
 def get_connection():
     return pymysql.connect(
-        host=os.environ.get('DB_HOST', '127.0.0.1'),
+        host=os.environ.get('DB_HOST', 'db'),
         user=os.environ.get('DB_USER', 'root'),
         password=os.environ.get('DB_PASSWORD', 'root'),
         database=os.environ.get('DB_NAME', 'mr_lenas'),
