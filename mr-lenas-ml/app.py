@@ -3,13 +3,64 @@ from flask_cors import CORS
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from datetime import datetime, timedelta
+from datetime import datetime
+import pymysql
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# ── Datos de entrenamiento simulados (historial de ventas Mr. Leñas) ──
-def generar_historial():
+# ── Conexión a MySQL ──
+def get_connection():
+    return pymysql.connect(
+        host=os.environ.get('DB_HOST', '127.0.0.1'),
+        user=os.environ.get('DB_USER', 'root'),
+        password=os.environ.get('DB_PASSWORD', 'root'),
+        database=os.environ.get('DB_NAME', 'mr_lenas'),
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+# ── Leer historial real desde MySQL ──
+def cargar_historial():
+    try:
+        conn = get_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("""
+                SELECT
+                    o.created_at AS fecha,
+                    oi.product_id,
+                    p.name AS product_name,
+                    SUM(oi.quantity) AS cantidad
+                FROM order_items oi
+                JOIN orders o ON oi.order_id = o.id
+                JOIN products p ON oi.product_id = p.id
+                GROUP BY DATE(o.created_at), oi.product_id, p.name
+                ORDER BY fecha ASC
+            """)
+            rows = cursor.fetchall()
+        conn.close()
+
+        if not rows:
+            print("⚠️ Sin datos en MySQL, usando historial simulado")
+            return generar_historial_simulado()
+
+        df = pd.DataFrame(rows)
+        df['fecha'] = pd.to_datetime(df['fecha'])
+        df['dia_semana'] = df['fecha'].dt.weekday
+        df['dia_mes'] = df['fecha'].dt.day
+        df['mes'] = df['fecha'].dt.month
+        df['es_finde'] = (df['dia_semana'] >= 4).astype(int)
+        df['fecha'] = df['fecha'].dt.strftime('%Y-%m-%d')
+        print(f"✅ Historial cargado desde MySQL: {len(df)} registros")
+        return df
+
+    except Exception as e:
+        print(f"⚠️ Error conectando a MySQL: {e} — usando historial simulado")
+        return generar_historial_simulado()
+
+# ── Fallback: datos simulados si MySQL no tiene historial ──
+def generar_historial_simulado():
+    from datetime import timedelta
     np.random.seed(42)
     productos = {
         1: 'Pollo a la brasa (entero)',
@@ -46,7 +97,7 @@ def generar_historial():
             })
     return pd.DataFrame(registros)
 
-df_historial = generar_historial()
+df_historial = cargar_historial()
 
 # ── Modelo de predicción por producto ──
 modelos = {}
@@ -116,7 +167,6 @@ def historial():
     return jsonify(df.tail(30).to_dict(orient='records'))
 
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get('PORT', 5000))
     print(f"🍗 Mr. Leñas — Módulo ML corriendo en http://localhost:{port}")
     app.run(host='0.0.0.0', debug=False, port=port)
