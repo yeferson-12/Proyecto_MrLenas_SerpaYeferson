@@ -29,7 +29,7 @@ def cargar_historial():
             with conn.cursor() as cursor:
                 cursor.execute("""
                     SELECT
-                        o.created_at AS fecha,
+                        DATE(o.created_at) AS fecha,
                         oi.product_id,
                         p.name AS product_name,
                         SUM(oi.quantity) AS cantidad
