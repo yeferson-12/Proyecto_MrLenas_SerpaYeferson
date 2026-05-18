@@ -550,8 +550,7 @@ export default function Admin() {
   role="dialog"
   aria-modal="true"
   aria-labelledby="prod-modal-title"
-  onClick={e => e.stopPropagation()}
-  onKeyDown={e => e.stopPropagation()}
+  
 >
             <p className="adm-modal-title" id="prod-modal-title">{editProd ? 'Editar producto' : 'Nuevo producto'}</p>
 
@@ -604,8 +603,7 @@ export default function Admin() {
   role="dialog"
   aria-modal="true"
   aria-labelledby="user-modal-title"
-  onClick={e => e.stopPropagation()}
-  onKeyDown={e => e.stopPropagation()}
+  
 >
             <p className="adm-modal-title" id="user-modal-title">{editUser ? 'Editar usuario' : 'Nuevo usuario'}</p>
 
