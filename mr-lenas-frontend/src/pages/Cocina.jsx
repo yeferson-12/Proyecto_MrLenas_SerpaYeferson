@@ -391,8 +391,9 @@ export default function Cocina() {
             <h2 className="ck-title">Panel de Cocina</h2>
             {activeOrders.length > 0 && (
               <span className="ck-count">
-                <span className="ck-count-dot" />
-                {activeOrders.length} activo{activeOrders.length !== 1 ? 's' : ''}
+                {/* ✅ L400: span separado del texto con espacio explícito */}
+                <span className="ck-count-dot" />{' '}
+                {activeOrders.length}{' '}activo{activeOrders.length !== 1 ? 's' : ''}
               </span>
             )}
           </div>
