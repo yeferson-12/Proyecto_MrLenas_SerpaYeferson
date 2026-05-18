@@ -537,7 +537,6 @@ export default function Admin() {
 
       {/* ══ MODAL PRODUCTO ══ */}
       {prodModal && (
-        /* ✅ L540: overlay con role=button + keyboard; modal con role=dialog */
         <div
           className="adm-overlay"
           role="button"
@@ -545,31 +544,26 @@ export default function Admin() {
           onClick={closeProdModal}
           onKeyDown={e => e.key === 'Escape' && closeProdModal()}
         >
-          <div
-  className="adm-modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="prod-modal-title"
-  
->
+          <dialog
+            className="adm-modal"
+            open
+            aria-labelledby="prod-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
             <p className="adm-modal-title" id="prod-modal-title">{editProd ? 'Editar producto' : 'Nuevo producto'}</p>
 
-            {/* ✅ L544 */}
             <label className="adm-label" htmlFor="prod-name">Nombre</label>
             <input id="prod-name" className="adm-input" value={prodForm.name} onChange={e => setProdForm(f => ({ ...f, name: e.target.value }))} placeholder="Ej: Pollo a la brasa (entero)" />
 
-            {/* ✅ L547 */}
             <label className="adm-label" htmlFor="prod-price">Precio (S/)</label>
             <input id="prod-price" className="adm-input" type="number" min="0" step="0.10" value={prodForm.price} onChange={e => setProdForm(f => ({ ...f, price: e.target.value }))} placeholder="0.00" />
 
-            {/* ✅ L550 */}
             <label className="adm-label" htmlFor="prod-category">Categoría</label>
             <select id="prod-category" className="adm-select" value={prodForm.category} onChange={e => setProdForm(f => ({ ...f, category: e.target.value }))}>
               <option value="">Seleccionar...</option>
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
 
-            {/* ✅ L556 */}
             <label className="adm-label" htmlFor="prod-image">URL de imagen (opcional)</label>
             <input id="prod-image" className="adm-input" value={prodForm.image_url} onChange={e => setProdForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." />
 
@@ -584,13 +578,12 @@ export default function Admin() {
                 {prodLoading ? 'Guardando...' : 'Guardar'}
               </button>
             </div>
-          </div>
+          </dialog>
         </div>
       )}
 
       {/* ══ MODAL USUARIO ══ */}
       {userModal && (
-        /* ✅ L576: overlay con role=button y keyboard */
         <div
           className="adm-overlay"
           role="button"
@@ -598,24 +591,20 @@ export default function Admin() {
           onClick={closeUserModal}
           onKeyDown={e => e.key === 'Escape' && closeUserModal()}
         >
-          <div
-  className="adm-modal"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="user-modal-title"
-  
->
+          <dialog
+            className="adm-modal"
+            open
+            aria-labelledby="user-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
             <p className="adm-modal-title" id="user-modal-title">{editUser ? 'Editar usuario' : 'Nuevo usuario'}</p>
 
-            {/* ✅ L580 */}
             <label className="adm-label" htmlFor="user-name">Nombre</label>
             <input id="user-name" className="adm-input" value={userForm.name} onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))} placeholder="Nombre completo" />
 
-            {/* ✅ L583 */}
             <label className="adm-label" htmlFor="user-email">Email</label>
             <input id="user-email" className="adm-input" type="email" value={userForm.email} onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))} placeholder="correo@ejemplo.com" />
 
-            {/* ✅ L589 */}
             <label className="adm-label" htmlFor="user-password">{editUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'}</label>
             <input id="user-password" className="adm-input" type="password" value={userForm.password} onChange={e => setUserForm(f => ({ ...f, password: e.target.value }))} placeholder="••••••••" />
 
@@ -630,11 +619,10 @@ export default function Admin() {
                 {userLoading ? 'Guardando...' : 'Guardar'}
               </button>
             </div>
-          </div>
+          </dialog>
         </div>
       )}
 
     </div>
   );
 }
-
