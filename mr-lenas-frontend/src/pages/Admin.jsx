@@ -291,7 +291,7 @@ function injectAdminCSS() {
 
 /* ─── validar ID numérico ─── */
 const safeId = (id) => {
-  const parsed = parseInt(id, 10);
+  const parsed = Number.parseInt(id, 10);
   if (isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
   return parsed;
 };
