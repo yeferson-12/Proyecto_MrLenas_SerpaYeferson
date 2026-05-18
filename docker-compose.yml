@@ -13,6 +13,7 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - mr_lenas_net
+
   backend:
     build:
       context: ./mr-lenas-backend
@@ -25,6 +26,7 @@ services:
       - db
     networks:
       - mr_lenas_net
+
   frontend:
     build:
       context: ./mr-lenas-frontend
@@ -35,6 +37,7 @@ services:
       - "3000:80"
     networks:
       - mr_lenas_net
+
   ml:
     build:
       context: ./mr-lenas-ml
@@ -45,8 +48,37 @@ services:
       - "5000:5000"
     networks:
       - mr_lenas_net
+
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: mr_lenas_sonar
+    restart: always
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_logs:/opt/sonarqube/logs
+    networks:
+      - mr_lenas_net
+
+  sonar-scanner:
+    image: sonarsource/sonar-scanner-cli
+    container_name: mr_lenas_scanner
+    depends_on:
+      - sonarqube
+    volumes:
+      - .:/usr/src
+    working_dir: /usr/src
+    networks:
+      - mr_lenas_net
+
 networks:
   mr_lenas_net:
     driver: bridge
+
 volumes:
   db_data:
+  sonar_data:
+  sonar_logs:
