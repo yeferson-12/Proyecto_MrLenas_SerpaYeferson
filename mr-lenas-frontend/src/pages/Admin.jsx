@@ -289,14 +289,12 @@ function injectAdminCSS() {
   }
 }
 
-/* ─── validar ID numérico ─── */
 const safeId = (id) => {
   const parsed = Number.parseInt(id, 10);
   if (Number.isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
   return parsed;
 };
 
-/* ─── valores por defecto ─── */
 const EMPTY_PRODUCT = { name: '', price: '', category: '', is_active: true, image_url: '' };
 const EMPTY_USER    = { name: '', email: '', password: '', role: 'cajero' };
 const CATEGORIES    = ['Pollos', 'Bebidas', 'Entradas', 'Postres', 'Ensaladas', 'Acompañamientos', 'Otros'];
@@ -307,7 +305,6 @@ export default function Admin() {
 
   const [tab, setTab] = useState('productos');
 
-  /* productos */
   const [products, setProducts]   = useState([]);
   const [prodModal, setProdModal] = useState(false);
   const [editProd, setEditProd]   = useState(null);
@@ -315,7 +312,6 @@ export default function Admin() {
   const [prodMsg, setProdMsg]     = useState(null);
   const [prodLoading, setProdLoading] = useState(false);
 
-  /* usuarios */
   const [users, setUsers]         = useState([]);
   const [userModal, setUserModal] = useState(false);
   const [editUser, setEditUser]   = useState(null);
@@ -325,7 +321,6 @@ export default function Admin() {
 
   useEffect(() => { fetchProducts(); fetchUsers(); }, []);
 
-  /* ── fetch ── */
   const fetchProducts = async () => {
     try { const r = await api.get('/products/all'); setProducts(r.data); } catch {}
   };
@@ -333,13 +328,11 @@ export default function Admin() {
     try { const r = await api.get('/users'); setUsers(r.data); } catch {}
   };
 
-  /* ── helpers mensaje ── */
   const flash = (setter, type, text) => {
     setter({ type, text });
     setTimeout(() => setter(null), 3000);
   };
 
-  /* ════ PRODUCTOS ════ */
   const openNewProd = () => {
     setEditProd(null);
     setProdForm(EMPTY_PRODUCT);
@@ -383,7 +376,6 @@ export default function Admin() {
     }
   };
 
-  /* ════ USUARIOS ════ */
   const openNewUser = () => {
     setEditUser(null);
     setUserForm(EMPTY_USER);
@@ -428,16 +420,21 @@ export default function Admin() {
     }
   };
 
-  /* ══ render ══ */
   return (
     <div className="adm-root">
 
       {/* Tabs */}
       <div className="adm-tabs">
-        <button className={`adm-tab${tab === 'productos' ? ' active' : ''}`} onClick={() => setTab('productos')}>
+        <button
+          className={`adm-tab${tab === 'productos' ? ' active' : ''}`}
+          onClick={() => setTab('productos')}
+        >
           Productos ({products.length})
         </button>
-        <button className={`adm-tab${tab === 'usuarios' ? ' active' : ''}`} onClick={() => setTab('usuarios')}>
+        <button
+          className={`adm-tab${tab === 'usuarios' ? ' active' : ''}`}
+          onClick={() => setTab('usuarios')}
+        >
           Usuarios ({users.length})
         </button>
       </div>
@@ -537,40 +534,72 @@ export default function Admin() {
 
       {/* ══ MODAL PRODUCTO ══ */}
       {prodModal && (
-        /* ✅ L540: overlay con role=button + keyboard; modal con role=dialog */
         <div
-          className="adm-overlay"`r`n          role="button"`r`n          tabIndex={0}
+          className="adm-overlay"
+          role="button"
+          tabIndex={0}
           onClick={closeProdModal}
           onKeyDown={e => e.key === 'Escape' && closeProdModal()}
         >
           <div
-  className="adm-modal"`r`n  role="dialog"`r`n  aria-modal="true"
-  aria-labelledby="prod-modal-title"
-  
->
-            <p className="adm-modal-title" id="prod-modal-title">{editProd ? 'Editar producto' : 'Nuevo producto'}</p>
+            className="adm-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="prod-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
+            <p className="adm-modal-title" id="prod-modal-title">
+              {editProd ? 'Editar producto' : 'Nuevo producto'}
+            </p>
 
-            {/* ✅ L544 */}
             <label className="adm-label" htmlFor="prod-name">Nombre</label>
-            <input id="prod-name" className="adm-input" value={prodForm.name} onChange={e => setProdForm(f => ({ ...f, name: e.target.value }))} placeholder="Ej: Pollo a la brasa (entero)" />
+            <input
+              id="prod-name"
+              className="adm-input"
+              value={prodForm.name}
+              onChange={e => setProdForm(f => ({ ...f, name: e.target.value }))}
+              placeholder="Ej: Pollo a la brasa (entero)"
+            />
 
-            {/* ✅ L547 */}
             <label className="adm-label" htmlFor="prod-price">Precio (S/)</label>
-            <input id="prod-price" className="adm-input" type="number" min="0" step="0.10" value={prodForm.price} onChange={e => setProdForm(f => ({ ...f, price: e.target.value }))} placeholder="0.00" />
+            <input
+              id="prod-price"
+              className="adm-input"
+              type="number"
+              min="0"
+              step="0.10"
+              value={prodForm.price}
+              onChange={e => setProdForm(f => ({ ...f, price: e.target.value }))}
+              placeholder="0.00"
+            />
 
-            {/* ✅ L550 */}
             <label className="adm-label" htmlFor="prod-category">Categoría</label>
-            <select id="prod-category" className="adm-select" value={prodForm.category} onChange={e => setProdForm(f => ({ ...f, category: e.target.value }))}>
+            <select
+              id="prod-category"
+              className="adm-select"
+              value={prodForm.category}
+              onChange={e => setProdForm(f => ({ ...f, category: e.target.value }))}
+            >
               <option value="">Seleccionar...</option>
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
 
-            {/* ✅ L556 */}
             <label className="adm-label" htmlFor="prod-image">URL de imagen (opcional)</label>
-            <input id="prod-image" className="adm-input" value={prodForm.image_url} onChange={e => setProdForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." />
+            <input
+              id="prod-image"
+              className="adm-input"
+              value={prodForm.image_url}
+              onChange={e => setProdForm(f => ({ ...f, image_url: e.target.value }))}
+              placeholder="https://..."
+            />
 
             <div className="adm-check-row">
-              <input type="checkbox" id="is_active" checked={prodForm.is_active} onChange={e => setProdForm(f => ({ ...f, is_active: e.target.checked }))} />
+              <input
+                type="checkbox"
+                id="is_active"
+                checked={prodForm.is_active}
+                onChange={e => setProdForm(f => ({ ...f, is_active: e.target.checked }))}
+              />
               <label htmlFor="is_active">Producto activo</label>
             </div>
 
@@ -586,33 +615,62 @@ export default function Admin() {
 
       {/* ══ MODAL USUARIO ══ */}
       {userModal && (
-        /* ✅ L576: overlay con role=button y keyboard */
         <div
-          className="adm-overlay"`r`n          role="button"`r`n          tabIndex={0}
+          className="adm-overlay"
+          role="button"
+          tabIndex={0}
           onClick={closeUserModal}
           onKeyDown={e => e.key === 'Escape' && closeUserModal()}
         >
           <div
-  className="adm-modal"`r`n  role="dialog"`r`n  aria-modal="true"
-  aria-labelledby="user-modal-title"
-  
->
-            <p className="adm-modal-title" id="user-modal-title">{editUser ? 'Editar usuario' : 'Nuevo usuario'}</p>
+            className="adm-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="user-modal-title"
+            onClick={e => e.stopPropagation()}
+          >
+            <p className="adm-modal-title" id="user-modal-title">
+              {editUser ? 'Editar usuario' : 'Nuevo usuario'}
+            </p>
 
-            {/* ✅ L580 */}
             <label className="adm-label" htmlFor="user-name">Nombre</label>
-            <input id="user-name" className="adm-input" value={userForm.name} onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))} placeholder="Nombre completo" />
+            <input
+              id="user-name"
+              className="adm-input"
+              value={userForm.name}
+              onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))}
+              placeholder="Nombre completo"
+            />
 
-            {/* ✅ L583 */}
             <label className="adm-label" htmlFor="user-email">Email</label>
-            <input id="user-email" className="adm-input" type="email" value={userForm.email} onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))} placeholder="correo@ejemplo.com" />
+            <input
+              id="user-email"
+              className="adm-input"
+              type="email"
+              value={userForm.email}
+              onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))}
+              placeholder="correo@ejemplo.com"
+            />
 
-            {/* ✅ L589 */}
-            <label className="adm-label" htmlFor="user-password">{editUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'}</label>
-            <input id="user-password" className="adm-input" type="password" value={userForm.password} onChange={e => setUserForm(f => ({ ...f, password: e.target.value }))} placeholder="••••••••" />
+            <label className="adm-label" htmlFor="user-password">
+              {editUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'}
+            </label>
+            <input
+              id="user-password"
+              className="adm-input"
+              type="password"
+              value={userForm.password}
+              onChange={e => setUserForm(f => ({ ...f, password: e.target.value }))}
+              placeholder="••••••••"
+            />
 
             <label className="adm-label" htmlFor="user-role">Rol</label>
-            <select id="user-role" className="adm-select" value={userForm.role} onChange={e => setUserForm(f => ({ ...f, role: e.target.value }))}>
+            <select
+              id="user-role"
+              className="adm-select"
+              value={userForm.role}
+              onChange={e => setUserForm(f => ({ ...f, role: e.target.value }))}
+            >
               {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
             </select>
 
@@ -629,6 +687,3 @@ export default function Admin() {
     </div>
   );
 }
-
-
-
