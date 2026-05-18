@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import api from '../services/api';
 
 const LOGIN_CSS = `
@@ -291,8 +292,9 @@ export default function Login({ onLogin }) {
 
         <form onSubmit={handleSubmit}>
           <div className="login-field">
-            <label className="login-label">Correo electrónico</label>
+            <label className="login-label" htmlFor="login-email">Correo electrónico</label>{/* ✅ L294 */}
             <input
+              id="login-email"
               className="login-input"
               type="email"
               value={email}
@@ -303,8 +305,9 @@ export default function Login({ onLogin }) {
           </div>
 
           <div className="login-field">
-            <label className="login-label">Contraseña</label>
+            <label className="login-label" htmlFor="login-password">Contraseña</label>{/* ✅ L306 */}
             <input
+              id="login-password"
               className="login-input"
               type="password"
               value={password}
@@ -331,3 +334,8 @@ export default function Login({ onLogin }) {
     </div>
   );
 }
+
+// ✅ L248 — PropTypes validation
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
