@@ -9,7 +9,7 @@ import os
 import time
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(','))
 
 # ── Conexión a MySQL ──
 def get_connection():
@@ -129,7 +129,7 @@ def prediccion():
     fecha_str = request.args.get('fecha', datetime.today().strftime('%Y-%m-%d'))
     try:
         fecha = datetime.strptime(fecha_str, '%Y-%m-%d')
-    except:
+    except ValueError:
         return jsonify({'error': 'Formato de fecha inválido. Usa YYYY-MM-DD'}), 400
 
     es_finde = int(fecha.weekday() >= 4)
@@ -173,5 +173,6 @@ def historial():
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
+    host = os.environ.get('HOST', '127.0.0.1')
     print(f"🍗 Mr. Leñas — Módulo ML corriendo en http://localhost:{port}")
-    app.run(host='0.0.0.0', debug=False, port=port)
+    app.run(host=host, debug=False, port=port)
