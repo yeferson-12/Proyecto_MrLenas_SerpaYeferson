@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: mr-lenas-frontend
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Run tests with coverage
         working-directory: mr-lenas-frontend
