@@ -289,6 +289,13 @@ function injectAdminCSS() {
   }
 }
 
+/* ─── validar ID numérico ─── */
+const safeId = (id) => {
+  const parsed = parseInt(id, 10);
+  if (isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
+  return parsed;
+};
+
 /* ─── valores por defecto ─── */
 const EMPTY_PRODUCT = { name: '', price: '', category: '', is_active: true, image_url: '' };
 const EMPTY_USER    = { name: '', email: '', password: '', role: 'cajero' };
@@ -353,7 +360,7 @@ export default function Admin() {
     setProdLoading(true);
     try {
       const payload = { ...prodForm, price: parseFloat(prodForm.price) };
-      if (editProd) await api.put(`/products/${editProd.id}`, payload);
+      if (editProd) await api.put(`/products/${safeId(editProd.id)}`, payload);
       else          await api.post('/products', payload);
       flash(setProdMsg, 'ok', editProd ? 'Producto actualizado.' : 'Producto creado.');
       closeProdModal();
@@ -368,7 +375,7 @@ export default function Admin() {
   const deleteProd = async (id) => {
     if (!window.confirm('¿Eliminar este producto?')) return;
     try {
-      await api.delete(`/products/${id}`);
+      await api.delete(`/products/${safeId(id)}`);
       flash(setProdMsg, 'ok', 'Producto eliminado.');
       fetchProducts();
     } catch {
@@ -398,7 +405,7 @@ export default function Admin() {
     try {
       const payload = { ...userForm };
       if (editUser && !payload.password) delete payload.password;
-      if (editUser) await api.put(`/users/${editUser.id}`, payload);
+      if (editUser) await api.put(`/users/${safeId(editUser.id)}`, payload);
       else          await api.post('/users', payload);
       flash(setUserMsg, 'ok', editUser ? 'Usuario actualizado.' : 'Usuario creado.');
       closeUserModal();
@@ -413,7 +420,7 @@ export default function Admin() {
   const deleteUser = async (id) => {
     if (!window.confirm('¿Eliminar este usuario?')) return;
     try {
-      await api.delete(`/users/${id}`);
+      await api.delete(`/users/${safeId(id)}`);
       flash(setUserMsg, 'ok', 'Usuario eliminado.');
       fetchUsers();
     } catch {
