@@ -62,6 +62,7 @@ export default function Pedidos() {
       setNotes('');
       fetchOrders();
     } catch (err) {
+     console.error('Error al registrar pedido:', err);
       setMsg('❌ Error al registrar el pedido.');
     } finally {
       setLoading(false);
