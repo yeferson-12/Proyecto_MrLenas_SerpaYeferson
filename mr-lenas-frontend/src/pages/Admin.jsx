@@ -12,6 +12,7 @@ const ADMIN_CSS = `
     color: #f5deb3;
   }
 
+  /* Tabs */
   .adm-tabs {
     display: flex;
     gap: 8px;
@@ -34,8 +35,12 @@ const ADMIN_CSS = `
     letter-spacing: 0.03em;
   }
   .adm-tab:hover { color: #f5deb3; }
-  .adm-tab.active { color: #f5deb3; border-bottom-color: #c8861a; }
+  .adm-tab.active {
+    color: #f5deb3;
+    border-bottom-color: #c8861a;
+  }
 
+  /* Header de sección */
   .adm-section-header {
     display: flex;
     justify-content: space-between;
@@ -49,6 +54,7 @@ const ADMIN_CSS = `
     font-weight: 600;
   }
 
+  /* Botón primario */
   .adm-btn-primary {
     padding: 9px 20px;
     background: #c8861a;
@@ -64,6 +70,7 @@ const ADMIN_CSS = `
   }
   .adm-btn-primary:hover { background: #e09820; }
 
+  /* Botones de acción en tabla */
   .adm-btn-edit {
     padding: 5px 12px;
     background: rgba(200,134,26,0.15);
@@ -91,13 +98,17 @@ const ADMIN_CSS = `
   }
   .adm-btn-delete:hover { background: rgba(220,60,40,0.25); }
 
+  /* Tabla */
   .adm-table-wrap {
     background: #1e1208;
     border-radius: 12px;
     border: 1px solid rgba(200,134,26,0.15);
     overflow: hidden;
   }
-  .adm-table { width: 100%; border-collapse: collapse; }
+  .adm-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
   .adm-table th {
     padding: 13px 18px;
     text-align: left;
@@ -119,27 +130,43 @@ const ADMIN_CSS = `
   .adm-table tr:last-child td { border-bottom: none; }
   .adm-table tr:hover td { background: rgba(200,134,26,0.04); }
 
+  /* Badge activo/inactivo */
   .adm-badge-active {
-    display: inline-block; padding: 2px 10px; border-radius: 99px;
-    font-size: 0.7rem; font-weight: 600;
-    background: rgba(62,207,142,0.12); color: #3ecf8e;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(62,207,142,0.12);
+    color: #3ecf8e;
     border: 1px solid rgba(62,207,142,0.25);
   }
   .adm-badge-inactive {
-    display: inline-block; padding: 2px 10px; border-radius: 99px;
-    font-size: 0.7rem; font-weight: 600;
-    background: rgba(150,120,90,0.12); color: #8a7060;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(150,120,90,0.12);
+    color: #8a7060;
     border: 1px solid rgba(150,120,90,0.2);
   }
+
+  /* Badge rol */
   .adm-badge-role {
-    display: inline-block; padding: 2px 10px; border-radius: 99px;
-    font-size: 0.7rem; font-weight: 600;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    background: rgba(200,134,26,0.12); color: #c8861a;
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(200,134,26,0.12);
+    color: #c8861a;
     border: 1px solid rgba(200,134,26,0.25);
   }
 
-  /* ✅ overlay como <button> reseteado — nativo e interactivo */
+  /* Modal overlay */
   .adm-overlay {
     position: fixed;
     inset: 0;
@@ -149,13 +176,7 @@ const ADMIN_CSS = `
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    cursor: default;
   }
-
   .adm-modal {
     background: #1e1208;
     border: 1px solid rgba(200,134,26,0.25);
@@ -164,7 +185,6 @@ const ADMIN_CSS = `
     width: 420px;
     max-width: 95vw;
     box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    text-align: left;
   }
   .adm-modal-title {
     font-family: 'Cormorant Garamond', serif;
@@ -173,6 +193,7 @@ const ADMIN_CSS = `
     margin-bottom: 20px;
   }
 
+  /* Inputs del modal */
   .adm-label {
     display: block;
     font-size: 0.72rem;
@@ -196,19 +217,35 @@ const ADMIN_CSS = `
     outline: none;
     transition: border 0.18s;
   }
-  .adm-input:focus, .adm-select:focus { border-color: rgba(200,134,26,0.55); }
+  .adm-input:focus, .adm-select:focus {
+    border-color: rgba(200,134,26,0.55);
+  }
   .adm-select option { background: #2c1a0e; }
 
+  /* Checkbox personalizado */
   .adm-check-row {
-    display: flex; align-items: center; gap: 10px; margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
   }
   .adm-check-row input[type=checkbox] {
-    width: 16px; height: 16px; accent-color: #c8861a; cursor: pointer;
+    width: 16px; height: 16px;
+    accent-color: #c8861a;
+    cursor: pointer;
   }
-  .adm-check-row label { font-size: 0.85rem; color: #b89060; cursor: pointer; }
+  .adm-check-row label {
+    font-size: 0.85rem;
+    color: #b89060;
+    cursor: pointer;
+  }
 
+  /* Botones del modal */
   .adm-modal-footer {
-    display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
   }
   .adm-btn-cancel {
     padding: 9px 20px;
@@ -223,14 +260,24 @@ const ADMIN_CSS = `
   }
   .adm-btn-cancel:hover { color: #f5deb3; border-color: rgba(200,134,26,0.4); }
 
+  /* Feedback */
   .adm-msg {
-    padding: 10px 16px; border-radius: 8px;
-    font-size: 0.82rem; font-weight: 500; margin-bottom: 16px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-bottom: 16px;
   }
   .adm-msg.ok  { background: rgba(62,207,142,0.1); color: #3ecf8e; border: 1px solid rgba(62,207,142,0.2); }
   .adm-msg.err { background: rgba(220,60,40,0.1);  color: #e06040; border: 1px solid rgba(220,60,40,0.2); }
 
-  .adm-empty { text-align: center; padding: 48px; color: #6a5040; font-size: 0.88rem; }
+  /* Empty state */
+  .adm-empty {
+    text-align: center;
+    padding: 48px;
+    color: #6a5040;
+    font-size: 0.88rem;
+  }
 `;
 
 function injectAdminCSS() {
@@ -242,12 +289,14 @@ function injectAdminCSS() {
   }
 }
 
+/* ─── validar ID numérico ─── */
 const safeId = (id) => {
   const parsed = Number.parseInt(id, 10);
   if (Number.isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
   return parsed;
 };
 
+/* ─── valores por defecto ─── */
 const EMPTY_PRODUCT = { name: '', price: '', category: '', is_active: true, image_url: '' };
 const EMPTY_USER    = { name: '', email: '', password: '', role: 'cajero' };
 const CATEGORIES    = ['Pollos', 'Bebidas', 'Entradas', 'Postres', 'Ensaladas', 'Acompañamientos', 'Otros'];
@@ -257,21 +306,26 @@ export default function Admin() {
   injectAdminCSS();
 
   const [tab, setTab] = useState('productos');
-  const [products, setProducts]       = useState([]);
-  const [prodModal, setProdModal]     = useState(false);
-  const [editProd, setEditProd]       = useState(null);
-  const [prodForm, setProdForm]       = useState(EMPTY_PRODUCT);
-  const [prodMsg, setProdMsg]         = useState(null);
+
+  /* productos */
+  const [products, setProducts]   = useState([]);
+  const [prodModal, setProdModal] = useState(false);
+  const [editProd, setEditProd]   = useState(null);
+  const [prodForm, setProdForm]   = useState(EMPTY_PRODUCT);
+  const [prodMsg, setProdMsg]     = useState(null);
   const [prodLoading, setProdLoading] = useState(false);
-  const [users, setUsers]             = useState([]);
-  const [userModal, setUserModal]     = useState(false);
-  const [editUser, setEditUser]       = useState(null);
-  const [userForm, setUserForm]       = useState(EMPTY_USER);
-  const [userMsg, setUserMsg]         = useState(null);
+
+  /* usuarios */
+  const [users, setUsers]         = useState([]);
+  const [userModal, setUserModal] = useState(false);
+  const [editUser, setEditUser]   = useState(null);
+  const [userForm, setUserForm]   = useState(EMPTY_USER);
+  const [userMsg, setUserMsg]     = useState(null);
   const [userLoading, setUserLoading] = useState(false);
 
   useEffect(() => { fetchProducts(); fetchUsers(); }, []);
 
+  /* ── fetch ── */
   const fetchProducts = async () => {
     try { const r = await api.get('/products/all'); setProducts(r.data); } catch {}
   };
@@ -279,12 +333,18 @@ export default function Admin() {
     try { const r = await api.get('/users'); setUsers(r.data); } catch {}
   };
 
+  /* ── helpers mensaje ── */
   const flash = (setter, type, text) => {
     setter({ type, text });
     setTimeout(() => setter(null), 3000);
   };
 
-  const openNewProd  = () => { setEditProd(null); setProdForm(EMPTY_PRODUCT); setProdModal(true); };
+  /* ════ PRODUCTOS ════ */
+  const openNewProd = () => {
+    setEditProd(null);
+    setProdForm(EMPTY_PRODUCT);
+    setProdModal(true);
+  };
   const openEditProd = (p) => {
     setEditProd(p);
     setProdForm({ name: p.name, price: p.price, category: p.category, is_active: !!p.is_active, image_url: p.image_url || '' });
@@ -294,7 +354,8 @@ export default function Admin() {
 
   const saveProd = async () => {
     if (!prodForm.name || !prodForm.price || !prodForm.category) {
-      flash(setProdMsg, 'err', 'Completa nombre, precio y categoría.'); return;
+      flash(setProdMsg, 'err', 'Completa nombre, precio y categoría.');
+      return;
     }
     setProdLoading(true);
     try {
@@ -302,20 +363,32 @@ export default function Admin() {
       if (editProd) await api.put(`/products/${safeId(editProd.id)}`, payload);
       else          await api.post('/products', payload);
       flash(setProdMsg, 'ok', editProd ? 'Producto actualizado.' : 'Producto creado.');
-      closeProdModal(); fetchProducts();
-    } catch { flash(setProdMsg, 'err', 'Error al guardar el producto.');
-    } finally { setProdLoading(false); }
+      closeProdModal();
+      fetchProducts();
+    } catch {
+      flash(setProdMsg, 'err', 'Error al guardar el producto.');
+    } finally {
+      setProdLoading(false);
+    }
   };
 
   const deleteProd = async (id) => {
     if (!window.confirm('¿Eliminar este producto?')) return;
     try {
       await api.delete(`/products/${safeId(id)}`);
-      flash(setProdMsg, 'ok', 'Producto eliminado.'); fetchProducts();
-    } catch { flash(setProdMsg, 'err', 'Error al eliminar.'); }
+      flash(setProdMsg, 'ok', 'Producto eliminado.');
+      fetchProducts();
+    } catch {
+      flash(setProdMsg, 'err', 'Error al eliminar.');
+    }
   };
 
-  const openNewUser  = () => { setEditUser(null); setUserForm(EMPTY_USER); setUserModal(true); };
+  /* ════ USUARIOS ════ */
+  const openNewUser = () => {
+    setEditUser(null);
+    setUserForm(EMPTY_USER);
+    setUserModal(true);
+  };
   const openEditUser = (u) => {
     setEditUser(u);
     setUserForm({ name: u.name, email: u.email, password: '', role: u.role });
@@ -325,7 +398,8 @@ export default function Admin() {
 
   const saveUser = async () => {
     if (!userForm.name || !userForm.email || (!editUser && !userForm.password)) {
-      flash(setUserMsg, 'err', 'Completa nombre, email y contraseña.'); return;
+      flash(setUserMsg, 'err', 'Completa nombre, email y contraseña.');
+      return;
     }
     setUserLoading(true);
     try {
@@ -334,22 +408,31 @@ export default function Admin() {
       if (editUser) await api.put(`/users/${safeId(editUser.id)}`, payload);
       else          await api.post('/users', payload);
       flash(setUserMsg, 'ok', editUser ? 'Usuario actualizado.' : 'Usuario creado.');
-      closeUserModal(); fetchUsers();
-    } catch { flash(setUserMsg, 'err', 'Error al guardar el usuario.');
-    } finally { setUserLoading(false); }
+      closeUserModal();
+      fetchUsers();
+    } catch {
+      flash(setUserMsg, 'err', 'Error al guardar el usuario.');
+    } finally {
+      setUserLoading(false);
+    }
   };
 
   const deleteUser = async (id) => {
     if (!window.confirm('¿Eliminar este usuario?')) return;
     try {
       await api.delete(`/users/${safeId(id)}`);
-      flash(setUserMsg, 'ok', 'Usuario eliminado.'); fetchUsers();
-    } catch { flash(setUserMsg, 'err', 'Error al eliminar.'); }
+      flash(setUserMsg, 'ok', 'Usuario eliminado.');
+      fetchUsers();
+    } catch {
+      flash(setUserMsg, 'err', 'Error al eliminar.');
+    }
   };
 
+  /* ══ render ══ */
   return (
     <div className="adm-root">
 
+      {/* Tabs */}
       <div className="adm-tabs">
         <button className={`adm-tab${tab === 'productos' ? ' active' : ''}`} onClick={() => setTab('productos')}>
           Productos ({products.length})
@@ -359,17 +442,27 @@ export default function Admin() {
         </button>
       </div>
 
+      {/* ── PRODUCTOS ── */}
       {tab === 'productos' && (
         <>
           <div className="adm-section-header">
             <span className="adm-section-title">Gestión de Productos</span>
             <button className="adm-btn-primary" onClick={openNewProd}>+ Nuevo producto</button>
           </div>
+
           {prodMsg && <div className={`adm-msg ${prodMsg.type}`}>{prodMsg.text}</div>}
+
           <div className="adm-table-wrap">
             <table className="adm-table">
               <thead>
-                <tr><th>#</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Estado</th><th>Acciones</th></tr>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
               </thead>
               <tbody>
                 {products.length === 0 && (
@@ -384,7 +477,8 @@ export default function Admin() {
                     <td>
                       {p.is_active
                         ? <span className="adm-badge-active">Activo</span>
-                        : <span className="adm-badge-inactive">Inactivo</span>}
+                        : <span className="adm-badge-inactive">Inactivo</span>
+                      }
                     </td>
                     <td>
                       <button className="adm-btn-edit" onClick={() => openEditProd(p)}>Editar</button>
@@ -398,17 +492,26 @@ export default function Admin() {
         </>
       )}
 
+      {/* ── USUARIOS ── */}
       {tab === 'usuarios' && (
         <>
           <div className="adm-section-header">
             <span className="adm-section-title">Gestión de Usuarios</span>
             <button className="adm-btn-primary" onClick={openNewUser}>+ Nuevo usuario</button>
           </div>
+
           {userMsg && <div className={`adm-msg ${userMsg.type}`}>{userMsg.text}</div>}
+
           <div className="adm-table-wrap">
             <table className="adm-table">
               <thead>
-                <tr><th>#</th><th>Nombre</th><th>Email</th><th>Rol</th><th>Acciones</th></tr>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Acciones</th>
+                </tr>
               </thead>
               <tbody>
                 {users.length === 0 && (
@@ -432,9 +535,16 @@ export default function Admin() {
         </>
       )}
 
-      {/* ══ MODAL PRODUCTO — overlay como <button> nativo ✅ ══ */}
+      {/* ══ MODAL PRODUCTO ══ */}
       {prodModal && (
-        <button type="button" className="adm-overlay" onClick={closeProdModal}>
+        /* ✅ L540: overlay con role=button + keyboard; modal con role=dialog */
+        <div
+          className="adm-overlay"
+          role="button"
+          tabIndex={0}
+          onClick={closeProdModal}
+          onKeyDown={e => e.key === 'Escape' && closeProdModal()}
+        >
           <div
             className="adm-modal"
             role="dialog"
@@ -442,36 +552,29 @@ export default function Admin() {
             aria-labelledby="prod-modal-title"
             onClick={e => e.stopPropagation()}
           >
-            <p className="adm-modal-title" id="prod-modal-title">
-              {editProd ? 'Editar producto' : 'Nuevo producto'}
-            </p>
+            <p className="adm-modal-title" id="prod-modal-title">{editProd ? 'Editar producto' : 'Nuevo producto'}</p>
 
+            {/* ✅ L544 */}
             <label className="adm-label" htmlFor="prod-name">Nombre</label>
-            <input id="prod-name" className="adm-input" value={prodForm.name}
-              onChange={e => setProdForm(f => ({ ...f, name: e.target.value }))}
-              placeholder="Ej: Pollo a la brasa (entero)" />
+            <input id="prod-name" className="adm-input" value={prodForm.name} onChange={e => setProdForm(f => ({ ...f, name: e.target.value }))} placeholder="Ej: Pollo a la brasa (entero)" />
 
+            {/* ✅ L547 */}
             <label className="adm-label" htmlFor="prod-price">Precio (S/)</label>
-            <input id="prod-price" className="adm-input" type="number" min="0" step="0.10"
-              value={prodForm.price}
-              onChange={e => setProdForm(f => ({ ...f, price: e.target.value }))}
-              placeholder="0.00" />
+            <input id="prod-price" className="adm-input" type="number" min="0" step="0.10" value={prodForm.price} onChange={e => setProdForm(f => ({ ...f, price: e.target.value }))} placeholder="0.00" />
 
+            {/* ✅ L550 */}
             <label className="adm-label" htmlFor="prod-category">Categoría</label>
-            <select id="prod-category" className="adm-select" value={prodForm.category}
-              onChange={e => setProdForm(f => ({ ...f, category: e.target.value }))}>
+            <select id="prod-category" className="adm-select" value={prodForm.category} onChange={e => setProdForm(f => ({ ...f, category: e.target.value }))}>
               <option value="">Seleccionar...</option>
               {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
 
+            {/* ✅ L556 */}
             <label className="adm-label" htmlFor="prod-image">URL de imagen (opcional)</label>
-            <input id="prod-image" className="adm-input" value={prodForm.image_url}
-              onChange={e => setProdForm(f => ({ ...f, image_url: e.target.value }))}
-              placeholder="https://..." />
+            <input id="prod-image" className="adm-input" value={prodForm.image_url} onChange={e => setProdForm(f => ({ ...f, image_url: e.target.value }))} placeholder="https://..." />
 
             <div className="adm-check-row">
-              <input type="checkbox" id="is_active" checked={prodForm.is_active}
-                onChange={e => setProdForm(f => ({ ...f, is_active: e.target.checked }))} />
+              <input type="checkbox" id="is_active" checked={prodForm.is_active} onChange={e => setProdForm(f => ({ ...f, is_active: e.target.checked }))} />
               <label htmlFor="is_active">Producto activo</label>
             </div>
 
@@ -482,12 +585,19 @@ export default function Admin() {
               </button>
             </div>
           </div>
-        </button>
+        </div>
       )}
 
-      {/* ══ MODAL USUARIO — overlay como <button> nativo ✅ ══ */}
+      {/* ══ MODAL USUARIO ══ */}
       {userModal && (
-        <button type="button" className="adm-overlay" onClick={closeUserModal}>
+        /* ✅ L576: overlay con role=button y keyboard */
+        <div
+          className="adm-overlay"
+          role="button"
+          tabIndex={0}
+          onClick={closeUserModal}
+          onKeyDown={e => e.key === 'Escape' && closeUserModal()}
+        >
           <div
             className="adm-modal"
             role="dialog"
@@ -495,30 +605,22 @@ export default function Admin() {
             aria-labelledby="user-modal-title"
             onClick={e => e.stopPropagation()}
           >
-            <p className="adm-modal-title" id="user-modal-title">
-              {editUser ? 'Editar usuario' : 'Nuevo usuario'}
-            </p>
+            <p className="adm-modal-title" id="user-modal-title">{editUser ? 'Editar usuario' : 'Nuevo usuario'}</p>
 
+            {/* ✅ L580 */}
             <label className="adm-label" htmlFor="user-name">Nombre</label>
-            <input id="user-name" className="adm-input" value={userForm.name}
-              onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))}
-              placeholder="Nombre completo" />
+            <input id="user-name" className="adm-input" value={userForm.name} onChange={e => setUserForm(f => ({ ...f, name: e.target.value }))} placeholder="Nombre completo" />
 
+            {/* ✅ L583 */}
             <label className="adm-label" htmlFor="user-email">Email</label>
-            <input id="user-email" className="adm-input" type="email" value={userForm.email}
-              onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))}
-              placeholder="correo@ejemplo.com" />
+            <input id="user-email" className="adm-input" type="email" value={userForm.email} onChange={e => setUserForm(f => ({ ...f, email: e.target.value }))} placeholder="correo@ejemplo.com" />
 
-            <label className="adm-label" htmlFor="user-password">
-              {editUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'}
-            </label>
-            <input id="user-password" className="adm-input" type="password" value={userForm.password}
-              onChange={e => setUserForm(f => ({ ...f, password: e.target.value }))}
-              placeholder="••••••••" />
+            {/* ✅ L589 */}
+            <label className="adm-label" htmlFor="user-password">{editUser ? 'Nueva contraseña (dejar vacío para no cambiar)' : 'Contraseña'}</label>
+            <input id="user-password" className="adm-input" type="password" value={userForm.password} onChange={e => setUserForm(f => ({ ...f, password: e.target.value }))} placeholder="••••••••" />
 
             <label className="adm-label" htmlFor="user-role">Rol</label>
-            <select id="user-role" className="adm-select" value={userForm.role}
-              onChange={e => setUserForm(f => ({ ...f, role: e.target.value }))}>
+            <select id="user-role" className="adm-select" value={userForm.role} onChange={e => setUserForm(f => ({ ...f, role: e.target.value }))}>
               {ROLES.map(r => <option key={r} value={r}>{r}</option>)}
             </select>
 
@@ -529,7 +631,7 @@ export default function Admin() {
               </button>
             </div>
           </div>
-        </button>
+        </div>
       )}
 
     </div>
