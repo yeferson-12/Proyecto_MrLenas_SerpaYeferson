@@ -292,7 +292,7 @@ function injectAdminCSS() {
 /* ─── validar ID numérico ─── */
 const safeId = (id) => {
   const parsed = Number.parseInt(id, 10);
-  if (isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
+  if (Number.isNaN(parsed) || parsed <= 0) throw new Error('ID inválido');
   return parsed;
 };
 
@@ -359,7 +359,7 @@ export default function Admin() {
     }
     setProdLoading(true);
     try {
-      const payload = { ...prodForm, price: parseFloat(prodForm.price) };
+      const payload = { ...prodForm, price: Number.parseFloat(prodForm.price) };
       if (editProd) await api.put(`/products/${safeId(editProd.id)}`, payload);
       else          await api.post('/products', payload);
       flash(setProdMsg, 'ok', editProd ? 'Producto actualizado.' : 'Producto creado.');
@@ -473,7 +473,7 @@ export default function Admin() {
                     <td style={{ color: '#6a5040' }}>{p.id}</td>
                     <td style={{ fontWeight: 500, color: '#f5deb3' }}>{p.name}</td>
                     <td>{p.category}</td>
-                    <td style={{ color: '#c8861a', fontWeight: 600 }}>S/ {parseFloat(p.price).toFixed(2)}</td>
+                    <td style={{ color: '#c8861a', fontWeight: 600 }}>S/ {Number.parseFloat(p.price).toFixed(2)}</td>
                     <td>
                       {p.is_active
                         ? <span className="adm-badge-active">Activo</span>
