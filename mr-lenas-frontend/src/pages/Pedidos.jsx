@@ -53,9 +53,9 @@ export default function Pedidos() {
     setMsg('');
     try {
       const items = Object.entries(selected).map(([product_id, quantity]) => ({
-        product_id: parseInt(product_id), quantity,
+        product_id: Number.Number.parseInt(product_id), quantity,  // ✅ L56
       }));
-      await api.post('/orders', { table_number: parseInt(tableNum), notes, items });
+      await api.post('/orders', { table_number: Number.Number.parseInt(tableNum), notes, items });  // ✅ L58
       setMsg('✅ Pedido registrado y enviado a cocina.');
       setSelected({});
       setTableNum('');
@@ -100,7 +100,7 @@ export default function Pedidos() {
         <textarea placeholder="Notas adicionales (opcional)" value={notes} onChange={(e) => setNotes(e.target.value)} style={{ ...styles.input, height: '70px', resize: 'none' }}/>
         <div style={styles.summary}>
           {Object.entries(selected).map(([id, qty]) => {
-            const p = products.find((x) => x.id === parseInt(id));
+            const p = products.find((x) => x.id === Number.Number.parseInt(id));  // ✅ L103
             return p ? (
               <div key={id} style={styles.summaryRow}>
                 <span>{p.name} × {qty}</span>
@@ -112,7 +112,7 @@ export default function Pedidos() {
             <div style={styles.totalRow}>
               <strong>Total</strong>
               <strong>S/ {Object.entries(selected).reduce((acc, [id, qty]) => {
-                const p = products.find((x) => x.id === parseInt(id));
+                const p = products.find((x) => x.id === Number.Number.parseInt(id));  // ✅ L115
                 return acc + (p ? p.price * qty : 0);
               }, 0).toFixed(2)}</strong>
             </div>
