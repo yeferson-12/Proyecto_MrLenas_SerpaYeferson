@@ -373,7 +373,7 @@ export default function Admin() {
   };
 
   const deleteProd = async (id) => {
-    if (!window.confirm('¿Eliminar este producto?')) return;
+    if (!globalThis.confirm('¿Eliminar este producto?')) return;
     try {
       await api.delete(`/products/${safeId(id)}`);
       flash(setProdMsg, 'ok', 'Producto eliminado.');
@@ -418,7 +418,7 @@ export default function Admin() {
   };
 
   const deleteUser = async (id) => {
-    if (!window.confirm('¿Eliminar este usuario?')) return;
+    if (!globalThis.confirm('¿Eliminar este usuario?')) return;
     try {
       await api.delete(`/users/${safeId(id)}`);
       flash(setUserMsg, 'ok', 'Usuario eliminado.');
@@ -637,3 +637,4 @@ export default function Admin() {
     </div>
   );
 }
+
