@@ -546,12 +546,13 @@ export default function Admin() {
           onKeyDown={e => e.key === 'Escape' && closeProdModal()}
         >
           <div
-            className="adm-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="prod-modal-title"
-            onClick={e => e.stopPropagation()}
-          >
+  className="adm-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="prod-modal-title"
+  onClick={e => e.stopPropagation()}
+  onKeyDown={e => e.stopPropagation()}
+>
             <p className="adm-modal-title" id="prod-modal-title">{editProd ? 'Editar producto' : 'Nuevo producto'}</p>
 
             {/* ✅ L544 */}
@@ -599,12 +600,13 @@ export default function Admin() {
           onKeyDown={e => e.key === 'Escape' && closeUserModal()}
         >
           <div
-            className="adm-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="user-modal-title"
-            onClick={e => e.stopPropagation()}
-          >
+  className="adm-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="user-modal-title"
+  onClick={e => e.stopPropagation()}
+  onKeyDown={e => e.stopPropagation()}
+>
             <p className="adm-modal-title" id="user-modal-title">{editUser ? 'Editar usuario' : 'Nuevo usuario'}</p>
 
             {/* ✅ L580 */}
